@@ -12,10 +12,10 @@ df <- df %>% replace_na(
 
 limits <- 1:4
 labels <- c("niska", "średnia", "wysoka", "bardzo wysoka")
-title = 'Uczestnicy badanego świata zaświadczają o autentyczności głównie poprzez bycie "osobą techniczną"'
+title = 'Uczestnicy badanego świata zaświadczają o autentyczności głównie poprzez\nbycie "osobą techniczną"'
 
-ggplot(df, aes(x = `Znajomość biznesu`,
-               y = `Znajomość technologii świata DS`)) + 
+autentycznosc <- ggplot(df, aes(y = `Znajomość biznesu`,
+               x = `Znajomość technologii świata DS`)) + 
   geom_text(aes(label = `Autentyczność uczestnictwa`,
                  colour = `Poziom maestrii?`), vjust = -1.2) +
   geom_point(aes(shape = `Nerd?`, colour = `Poziom maestrii?`), size = 4) +
@@ -24,7 +24,16 @@ ggplot(df, aes(x = `Znajomość biznesu`,
   coord_fixed(ratio = 1/1) +
   scale_colour_brewer(palette = "Spectral") +
   theme_minimal(base_family = "serif", base_size = 10) +
-  labs(title = title) +
-  coord_flip()
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        legend.box = "vertical") +
+  labs(title = title)
 
-# dodać znajomość niska, średnia, wysoka, bardzo wysoka
+make_png <- function(my_plot, height) {
+  png(paste(deparse(substitute(my_plot)), "png", sep = "."), 
+      width = 160, height = height, 
+      units = "mm", res = 300)
+  plot(my_plot)
+  dev.off()
+}
+
+make_png(autentycznosc, 180)
