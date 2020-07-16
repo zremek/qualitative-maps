@@ -16,16 +16,16 @@ title = 'Uczestnicy badanego świata zaświadczają o autentyczności głównie 
 
 autentycznosc <- ggplot(df, aes(y = `Znajomość biznesu`,
                x = `Znajomość technologii świata DS`)) + 
-  geom_text(aes(label = `Autentyczność uczestnictwa`,
-                 colour = `Poziom maestrii?`), vjust = -1.2) +
+  geom_label(aes(label = `Autentyczność uczestnictwa`,
+                 colour = `Poziom maestrii?`), nudge_y = .35) +
   geom_point(aes(shape = `Nerd?`, colour = `Poziom maestrii?`), size = 4) +
   scale_x_discrete(limits = limits, labels = labels) +
   scale_y_discrete(limits = limits, labels = labels) +
   coord_fixed(ratio = 1/1) +
   scale_colour_brewer(palette = "Spectral") +
   theme_minimal(base_family = "serif", base_size = 10) +
-  theme(legend.position = "bottom", legend.direction = "horizontal",
-        legend.box = "vertical") +
+  # theme(legend.position = "bottom", legend.direction = "horizontal",
+  #       legend.box = "vertical") +
   labs(title = title)
 
 make_png <- function(my_plot, height) {
@@ -36,4 +36,4 @@ make_png <- function(my_plot, height) {
   dev.off()
 }
 
-make_png(autentycznosc, 180)
+make_png(autentycznosc, 120)
