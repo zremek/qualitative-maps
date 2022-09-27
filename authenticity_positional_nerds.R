@@ -15,16 +15,18 @@ caption = "Source: own elabortation"
 
 ggplot(df, aes(y = `Business expertise`,
                x = `DS technology expertise`)) + 
-  geom_label(aes(label = `Authenticity`,
-                 colour = `Mastery level`), nudge_y = .35) +
-  geom_point(aes(shape = `Nerd level`, colour = `Mastery level`), size = 4) +
+  geom_label(aes(label = `Authenticity`), nudge_y = .35) +
+  geom_point(aes(fill = `Nerd level`, shape = `Mastery level`), size = 6) +
   scale_x_discrete(limits = labels, labels = labels) +
   scale_y_discrete(limits = labels, labels = labels) +
+  scale_shape_manual(values = c(22, 24, 23, 25)) +
   coord_fixed(ratio = 1/1) +
-  scale_colour_brewer(palette = "Spectral") +
+  scale_fill_grey() +
   # theme(legend.position = "bottom", legend.direction = "horizontal",
   #       legend.box = "vertical") +
-  labs(title = title, subtitle = subtitle, caption = caption)
+  labs(title = title, subtitle = subtitle, caption = caption) +
+  guides(fill = guide_legend(override.aes = list(shape = 21))) +
+  theme_light()
 
 # TODO: change shape for nerd level - no simple points 
 
