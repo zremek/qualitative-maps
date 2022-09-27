@@ -21,14 +21,12 @@ ggplot(df, aes(y = `Business expertise`,
   scale_y_discrete(limits = labels, labels = labels) +
   scale_shape_manual(values = c(22, 24, 23, 25)) +
   coord_fixed(ratio = 1/1) +
-  scale_fill_grey() +
+  scale_fill_brewer(palette = "Greys", direction = -1) +
   # theme(legend.position = "bottom", legend.direction = "horizontal",
   #       legend.box = "vertical") +
   labs(title = title, subtitle = subtitle, caption = caption) +
   guides(fill = guide_legend(override.aes = list(shape = 21))) +
   theme_light()
-
-# TODO: change shape for nerd level - no simple points 
 
 # make_png <- function(my_plot, height) {
 #   png(paste(deparse(substitute(my_plot)), "png", sep = "."), 
